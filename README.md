@@ -243,7 +243,3 @@ Microsoft list of **important Windows Event IDs**:
 
    ✅ This does not ask for the current password.
 
----
-
-If you want, I can also **add diagrams** for Chain of Custody, STRIDE, and Forensics Lifecycle so your GitHub page looks visually professional.
-Do you want me to prepare that visual version too?
