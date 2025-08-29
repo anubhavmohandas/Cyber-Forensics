@@ -16,6 +16,12 @@ A complete reference guide covering **Digital Forensics (DF)**, **Cyber Forensic
 * [🧰 Essential Tools List](#-essential-tools-list)
 * [🖥️ Windows Security & Authentication](#️-windows-security--authentication)
 * [🕵️ Anti-Forensics Techniques](#-anti-forensics-techniques)
+* [📧 Email Headers](#-email-headers)
+* [💾 Linux File Systems](#-linux-file-systems)
+* [🗂️ Windows Registry & Forensics Artifacts](#️-windows-registry--forensics-artifacts)
+* [💻 CMD vs PowerShell](#-cmd-vs-powershell)
+* [📊 Windows Activity Monitoring](#-windows-activity-monitoring)
+* [🐍 Lua Programming & Malware](#-lua-programming--malware)
 * [🔬 Advanced Concepts](#-advanced-concepts)
 * [📚 Additional Resources](#-additional-resources)
 
@@ -182,7 +188,7 @@ cd zphisher && chmod +x zphisher.sh && ./zphisher.sh
 | Autopsy      | Digital forensics   | [🔗](https://www.autopsy.com/download/)  |
 | FTK Imager   | Evidence imaging    | [🔗](https://www.exterro.com/ftk-imager) |
 | Ghidra       | Reverse engineering | [🔗](https://ghidra-sre.org/)            |
-| Velociraptor | Endpoint monitoring | [🔗](https://www.velocidex.com/)         |
+| Velociraptor | Endpoint monitoring | [🔗](https://www.velocidx.com/)         |
 
 ---
 
@@ -211,12 +217,126 @@ Key IDs: 4624 (logon), 4724 (password reset), 1102 (log cleared)
 
 ---
 
+## 📧 Email Headers
+
+Email headers contain metadata about message routing and delivery:
+
+```
+From: sender@example.com
+To: recipient@example.com
+Date: Mon, 15 Jan 2024 14:30:00 +0000
+Message-ID: <abc123@mail.example.com>
+Received: from mail.example.com by mx.recipient.com
+X-Originating-IP: 192.168.1.100
+```
+
+**🔍 Key Fields for Forensics:**
+* `Received:` - Shows email routing path
+* `X-Originating-IP:` - Original sender's IP
+* `Message-ID:` - Unique identifier
+* `Date:` - Timestamp information
+
+---
+
+## 💾 Linux File Systems
+
+Common file systems supported in Linux:
+
+* **ext4** - Default Linux file system
+* **ext3/ext2** - Older extended file systems
+* **XFS** - High-performance journaling
+* **Btrfs** - Modern copy-on-write
+* **NTFS** - Windows compatibility
+* **FAT32/exFAT** - USB/SD card compatibility
+
+💡 **Linux Reality:** Linux is actually a **kernel**, not a complete operating system. Distributions like Ubuntu, CentOS combine Linux kernel with GNU tools.
+
+---
+
+## 🗂️ Windows Registry & Forensics Artifacts
+
+### 📝 Prefetch Files (.pf files)
+
+Located: `C:\Windows\Prefetch\`
+* Tracks program execution history
+* Shows last run time and frequency
+* Useful for timeline analysis
+
+### 🗝️ Registry Keys Structure
+
+```
+HKEY_CURRENT_USER (HKCU)
+├── Software
+├── System
+└── Security
+
+Registry stored in:
+- NTUSER.DAT (user-specific, created at first login)
+- SYSTEM, SOFTWARE, SAM (system-wide)
+```
+
+### 🗃️ ShellBags
+
+Track user's folder access history:
+* **Location:** `HKCU\Software\Microsoft\Windows\Shell`
+* **Purpose:** Remember folder view settings
+* **Forensic Value:** Shows deleted folders user accessed
+* **Timeline:** Can reveal past user activities even after file deletion
+
+---
+
+## 💻 CMD vs PowerShell
+
+| Feature | CMD | PowerShell |
+|---------|-----|------------|
+| **Type** | Command interpreter | Object-oriented shell |
+| **Objects** | Text-based | .NET objects |
+| **Scripting** | Batch files (.bat) | Scripts (.ps1) |
+| **Power** | Basic commands | Advanced automation |
+
+**🔍 PowerShell in Windows Forensics:**
+* Execute commands remotely
+* Query WMI (Windows Management Instrumentation)
+* Access registry, event logs, system info
+* Create detailed system reports
+* Analyze file metadata and timestamps
+
+---
+
+## 📊 Windows Activity Monitoring
+
+**🎯 Key Artifacts for User Activity:**
+
+* **📋 Event Logs** - System, Security, Application logs
+* **📁 Prefetch Files (.pf)** - Program execution tracking  
+* **🔗 Jump Lists** - Recent files/programs accessed
+* **🗂️ Shell Bags** - Folder navigation history (even deleted folders)
+
+💡 These artifacts work together to create comprehensive user activity timeline.
+
+**💾 Linux Memory Management:**
+**Swap Memory** is used when RAM is full - virtual memory extension on disk located at `/swap` partition or `/swapfile`. Has forensic value as it may contain sensitive data from memory.
+
+---
+
+## 🐍 Lua Programming & Malware
+
+**🦠 Lua in Malware Development:**
+* Lightweight scripting language
+* Embedded in many applications
+* **Advantage for attackers:** Less common = harder to detect/analyze
+* Used for payload delivery and evasion techniques
+* Difficult to reverse engineer due to limited analyst familiarity
+
+---
+
 ## 🔬 Advanced Concepts
 
 * 📱 **WakeLock abuse** in Android
 * 📦 **APK Manipulation** with `msfvenom`, `jarsigner`
 * 🌐 **Shodan** for exposed devices – [Shodan.io](https://www.shodan.io/)
 * 🔑 **Mimikatz** credential extraction – [GitHub](https://github.com/gentilkiwi/mimikatz)
+* 🛠️ **REMnux** - The best malware analysis toolkit – [REMnux.org](https://remnux.org/)
 
 ---
 
@@ -226,6 +346,8 @@ Key IDs: 4624 (logon), 4724 (password reset), 1102 (log cleared)
 * 🛡️ [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
 * 🎓 [SANS DFIR](https://www.sans.org/cyber-aces/)
 * 🏛️ [CISA](https://www.cisa.gov/)
+* 🔓 [Hacking Articles](https://www.hackingarticles.in/) - Comprehensive hacking tutorials
+* 🛠️ [REMnux](https://remnux.org/) - Malware analysis toolkit
 
 ---
 
